@@ -1,6 +1,8 @@
 # Get-CleanAssign1
 #Getting and Cleaning Data Assignment
 
+Sorry for the lame markdown presentation, this is the first time that i use it
+
 ## * Load the data separately
 _take the train data as an example, the test data just the same_
 > ###  subject
