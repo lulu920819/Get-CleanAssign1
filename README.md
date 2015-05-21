@@ -4,42 +4,46 @@
 ## * Load the data separately
 _take the train data as an example, the test data just the same_
 > ###  subject
+<code>
 
->1. set 
->>`path_train_sub <- "./UCI HAR Dataset/train/subject_train.txt"`
+>- set 
+>>path_train_sub <- "./UCI HAR Dataset/train/subject_train.txt"
 
->2. load
+>- load
 
->>`train_sub <- tbl_df(read.table(path_train_sub,col.names = "id"))`
+>><font color = reds> train_sub </font><- tbl_df(read.table(path_train_sub,col.names = "id"))
+</code>
 
 > ###  data
+<code>
 
->1. get the feature name
->>`features <- tbl_df(read.table("./UCI HAR Dataset/features.txt",check.names = TRUE))`
+>- get the feature name
+>>features <- tbl_df(read.table("./UCI HAR Dataset/features.txt",check.names = TRUE))
 
->>`var_name <- as.vector(features[[2]])`
+>>var_name <- as.vector(features[[2]])
 
->2. set path 
->>`path_train_data <- "./UCI HAR Dataset/train/X_train.txt"`
+>- set path 
+>>path_train_data <- "./UCI HAR Dataset/train/X_train.txt"
 
->3. load
->>`train_data <- tbl_df(read.table(path_train_data,col.names = var_name))`
-
+>- load
+>><font color = reds>train_data </font><- tbl_df(read.table(path_train_data,col.names = var_name))
+</code>
 
 > ###  activity
+<code>
+>- set path 
 
->1. set path 
+>>path_train_activity <- "./UCI HAR Dataset/train/y_train.txt"
 
->>`path_train_activity <- "./UCI HAR Dataset/train/y_train.txt"`
+>- load
+>>train_act <- tbl_df(read.table(path_train_activity,col.names = "act_No"))
 
->2. load
->>`train_act <- tbl_df(read.table(path_train_activity,col.names = "act_No"))`
+>>act_label <- tbl_df(read.table("./UCI HAR Dataset/activity_labels.txt",col.names =c("act_No","activity")))
 
->>`act_label <- tbl_df(read.table("./UCI HAR Dataset/activity_labels.txt",col.names =c("act_No","activity")))`
+>- join the table
 
->3. join the table
-
->>`train_act <- left_join(train_act,act_label)`
+>><font color = reds>train_act </font><- left_join(train_act,act_label)
+</code>
 
 ###**Now we get the dataset **
 
@@ -57,6 +61,7 @@ _take the train data as an example, the test data just the same_
 >all <- tbl_df(bind_rows(train,test))
 </code>
 
+****
 ##  * Mean and standard deviation 
 <code>
 >grouped <- group_by(all,id,activity)
@@ -64,6 +69,6 @@ _take the train data as an example, the test data just the same_
 >result <- summarise_each(grouped,funs(mean,sd),-(id:activity))
 
 </code>
-
+****
 ## * write the result
 >`write.table(result,file = "ass1.txt",row.name=FALSE)`
