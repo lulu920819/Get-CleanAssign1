@@ -1,7 +1,7 @@
 library(dplyr)
 library(tidyr)
 library(reshape2)
-# subject
+## subject
 path_train_sub <- "./UCI HAR Dataset/train/subject_train.txt"
 path_test_sub <- "./UCI HAR Dataset/test/subject_test.txt"
 
@@ -20,10 +20,9 @@ train_data <- tbl_df(read.table(path_train_data,col.names = var_name))
 test_data <- tbl_df(read.table(path_test_data,col.names = var_name))
 
 
-# activity
+## activity
 path_train_activity <- "./UCI HAR Dataset/train/y_train.txt"
 path_test_activity <- "./UCI HAR Dataset/test/y_test.txt"
-
 
 train_act <- tbl_df(read.table(path_train_activity,col.names = "act_No"))
 test_act <- tbl_df(read.table(path_test_activity,col.names = "act_No"))
@@ -32,7 +31,7 @@ act_label <- tbl_df(read.table("./UCI HAR Dataset/activity_labels.txt",col.names
 
 train_act <- left_join(train_act,act_label)
 test_act <- left_join(test_act,act_label)
-#View(act_train)
+## View(act_train)
 
 
 ##create a new dataframe
@@ -45,5 +44,5 @@ all <- tbl_df(bind_rows(train,test))
 grouped <- group_by(all,id,activity)
 result <- summarise_each(grouped,funs(mean,sd),-(id:activity))
 
-write.table(result,file = "ass1.csv",row.name=FALSE)
+write.table(result,file = "ass1.txt",row.name=FALSE)
 ##ass1 <- read.table("ass1.csv",header = TRUE)
